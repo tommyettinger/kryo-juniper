@@ -207,6 +207,42 @@ public class RandomTest {
             Assert.assertEquals(data, data2);
         }
     }
+
+    @Test
+    public void testXorShiftBasic64QuasiRandom() {
+        Kryo kryo = new Kryo();
+        kryo.register(XorShiftBasic64QuasiRandom.class, new XorShiftBasic64QuasiRandomSerializer());
+
+        XorShiftBasic64QuasiRandom data = new XorShiftBasic64QuasiRandom(-12345L);
+
+        Output output = new Output(32, -1);
+        kryo.writeObject(output, data);
+        byte[] bytes = output.toBytes();
+        try (Input input = new Input(bytes)) {
+            XorShiftBasic64QuasiRandom data2 = kryo.readObject(input, XorShiftBasic64QuasiRandom.class);
+            Assert.assertEquals(data.nextInt(), data2.nextInt());
+            Assert.assertEquals(data.nextLong(), data2.nextLong());
+            Assert.assertEquals(data, data2);
+        }
+    }
+
+    @Test
+    public void testXorShift64QuasiRandom() {
+        Kryo kryo = new Kryo();
+        kryo.register(XorShift64QuasiRandom.class, new XorShift64QuasiRandomSerializer());
+
+        XorShift64QuasiRandom data = new XorShift64QuasiRandom(-12345L);
+
+        Output output = new Output(32, -1);
+        kryo.writeObject(output, data);
+        byte[] bytes = output.toBytes();
+        try (Input input = new Input(bytes)) {
+            XorShift64QuasiRandom data2 = kryo.readObject(input, XorShift64QuasiRandom.class);
+            Assert.assertEquals(data.nextInt(), data2.nextInt());
+            Assert.assertEquals(data.nextLong(), data2.nextLong());
+            Assert.assertEquals(data, data2);
+        }
+    }
     
     @Test
     public void testLaserRandom() {
