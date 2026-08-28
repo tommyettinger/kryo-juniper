@@ -5,10 +5,16 @@ Kryo 5.x support for classes from [juniper](https://github.com/tommyettinger/jun
 
 Use JitPack.io as your repository (which gdx-liftoff projects already can do) and depend on:
 ```
-implementation "com.github.tommyettinger:kryo-juniper:0.10.5.2"
+implementation "com.github.tommyettinger:kryo-juniper:0.10.6.2"
 ```
 
 This depends on Kryo 5.6.2 .
+
+## Usage
+
+See [the test class for EnhancedRandom generators](src/test/java/com/github/tommyettinger/kryo/juniper/RandomTest.java)
+and [the test class for Distribution](src/test/java/com/github/tommyettinger/kryo/juniper/DistributionTest.java) that
+test each of the Serializer classes here.
 
 ## Older Versions
 
