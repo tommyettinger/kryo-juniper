@@ -101,6 +101,24 @@ public class RandomTest {
     }
 
     @Test
+    public void testWoolRandom() {
+        Kryo kryo = new Kryo();
+        kryo.register(WoolRandom.class, new WoolRandomSerializer());
+
+        WoolRandom data = new WoolRandom(-12345L);
+
+        Output output = new Output(32, -1);
+        kryo.writeObject(output, data);
+        byte[] bytes = output.toBytes();
+        try (Input input = new Input(bytes)) {
+            WoolRandom data2 = kryo.readObject(input, WoolRandom.class);
+            Assert.assertEquals(data.nextInt(), data2.nextInt());
+            Assert.assertEquals(data.nextLong(), data2.nextLong());
+            Assert.assertEquals(data, data2);
+        }
+    }
+
+    @Test
     public void testLCG64Random() {
         Kryo kryo = new Kryo();
         kryo.register(LCG64Random.class, new LCG64RandomSerializer());
