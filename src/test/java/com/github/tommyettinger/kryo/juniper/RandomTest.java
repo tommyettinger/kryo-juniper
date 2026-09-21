@@ -984,10 +984,6 @@ public class RandomTest {
         byte[] bytes = output.toBytes();
         try (Input input = new Input(bytes)) {
             ArchivalWrapper data2 = kryo.readObject(input, ArchivalWrapper.class);
-//            System.out.println("data...");
-//            System.out.println(data);
-//            System.out.println("vs. data2...");
-//            System.out.println(data2);
             Assert.assertEquals(data.nextInt(), data2.nextInt());
             Assert.assertEquals(data.nextLong(), data2.nextLong());
             Assert.assertEquals(data, data2);
